@@ -1,0 +1,16 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="icons">
+        <file alias="ic_launcher.png">resources/icons/ic_launcher.png</file>
+        <file alias="ic_fluent_arrow_reset_24_filled.png">resources/icons/ic_fluent_arrow_reset_24_filled.png</file>
+        <file alias="ic_fluent_arrow_undo_24_filled.png">resources/icons/ic_fluent_arrow_undo_24_filled.png</file>
+        <file alias="ic_fluent_checkmark_24_filled.png">resources/icons/ic_fluent_checkmark_24_filled.png</file>
+        <file alias="ic_fluent_point_scan_24_filled.png">resources/icons/ic_fluent_point_scan_24_filled.png</file>
+        <file alias="ic_fluent_scan_object_24_filled.png">resources/icons/ic_fluent_scan_object_24_filled.png</file>
+        <file alias="ic_fluent_scan_text_24_filled.png">resources/icons/ic_fluent_scan_text_24_filled.png</file>
+    </qresource>
+
+    <qresource prefix="fonts">
+        <file alias="Inter-Regular.ttf">resources/fonts/Inter-Regular.ttf</file>
+    </qresource>
+</RCC>

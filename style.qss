@@ -1,0 +1,169 @@
+/* Dark theme */
+/* Primary: #BB86FC */
+/* Primary variant: #3700B3 */
+/* Secondary: #03DAC6 */
+/* Background: #121212 */
+/* Surface: #121212 */
+/* Error: #CF6679 */
+/* On primary: #000000 */
+/* On secondary: #000000 */
+/* On background: #FFFFFF */
+/* On surface: #FFFFFF */
+/* On error: #000000 */
+
+
+* {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+QWidget {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+QLabel {
+    color: #ffffff;
+    background-color: transparent;
+}
+
+QLabel#h1 {
+    font-size: 20px;
+}
+
+QLabel#h2 {
+    font-size: 16px;
+}
+
+QLabel#h3 {
+    font-size: 14px;
+}
+
+QLabel#h4 {
+    font-size: 12px;
+}
+
+QLabel#version {
+    font-size: 8px;
+    font-weight: 200;
+    color: #949494;
+}
+
+QPushButton {
+    background-color: #121212;
+    background-opacity: 0.5;
+    color: #ffffff;
+    border: 1px solid #414141;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QPushButton:hover {
+    background-color: #1e1e1e;
+}
+
+QPushButton:pressed {
+    background-color: #2b2b2b;
+    border: 1px solid #ffffff;
+}
+
+QPushButton#primary {
+    background-color: #BB86FC;
+    color: #000000;
+}
+
+QPushButton#primary:hover {
+    background-color: #c792ff;
+}
+
+QPushButton#primary:pressed {
+    background-color: #d4a0ff;
+    border: 1px solid #BB86FC;
+}
+
+QPushButton#primaryOutline {
+    background-color: transparent;
+    color: #BB86FC;
+    border: 1px solid #BB86FC;
+}
+
+QPushButton#primaryOutline:hover {
+    background-color: #c792ff;
+    color: #ffffff;
+}
+
+QPushButton#primaryOutline:pressed {
+    background-color: #d4a0ff;
+    border: 1px solid #BB86FC;
+    color: #ffffff;
+}
+
+QPushButton#secondary {
+    background-color: #03DAC6;
+    color: #000000;
+    border: 1px solid #03DAC6;
+}
+
+QPushButton#secondary:hover {
+    background-color: #0ee5d0;
+}
+
+QPushButton#secondary:pressed {
+    background-color: #1af0da;
+}
+
+QCheckBox {
+    spacing: 5px;
+}
+
+QCheckBox::indicator {
+    width: 13px;
+    height: 13px;
+}
+
+QCheckBox::indicator:unchecked {
+    background-color: #121212;
+    border: 1px solid #414141;
+    border-radius: 2px;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    background-color: #1e1e1e;
+}
+
+QCheckBox::indicator:unchecked:pressed {
+    background-color: #2b2b2b;
+    border: 1px solid #ffffff;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #BB86FC;
+    border: 1px solid #BB86FC;
+    border-radius: 2px;
+    image: url(:/icons/ic_fluent_checkmark_24_filled.png);
+}
+
+QCheckBox::indicator:checked:hover {
+    background-color: #c792ff;
+}
+
+QCheckBox::indicator:checked:pressed {
+    background-color: #d4a0ff;
+    border: 1px solid #ffffff;
+}
+
+QCheckBox::indicator:indeterminate {
+    background-color: #BB86FC;
+    border: 1px solid #BB86FC;
+    border-radius: 2px;
+    image: url(:/icons/ic_fluent_checkmark_24_filled.png);
+}
+
+QCheckBox::indicator:indeterminate:hover {
+    background-color: #c792ff;
+}
+
+QCheckBox::indicator:indeterminate:pressed {
+    background-color: #d4a0ff;
+    border: 1px solid #ffffff;
+}
+
