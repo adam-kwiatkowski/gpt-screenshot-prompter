@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QFontDatabase, QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QCheckBox
 from widgets.RegionSelectOverlay import RegionSelectOverlay
+from widgets.ScrollableTextWidget import ScrollableTextWidget
 
 
 class OpenAIStreamer(QThread):
@@ -36,7 +37,7 @@ class MainWindow(QWidget):
         self.overlay = None
         self.screenshot = None
 
-        self.setGeometry(100, 100, 300, 100)
+        self.setGeometry(100, 100, 300, 400)
         self.setWindowTitle('GPT Prompter')
         self.setWindowIcon(QIcon(':/icons/ic_launcher.png'))
 
@@ -53,9 +54,9 @@ class MainWindow(QWidget):
         self.start_button.setObjectName('primary')
         layout.addWidget(self.start_button)
 
-        self.response_label = QLabel('Response will appear here...')
-        self.response_label.setWordWrap(True)
-        layout.addWidget(self.response_label)
+        self.response_widget = ScrollableTextWidget()
+        self.response_widget.setText("Response will appear here.")
+        layout.addWidget(self.response_widget)
 
         self.version_label = QLabel('Adam Kwiatkowski v0.1.0')
         self.version_label.setObjectName('version')
@@ -84,14 +85,14 @@ class MainWindow(QWidget):
 
         self.thread = OpenAIStreamer(img_base64)
         self.thread.response_chunk.connect(self.update_response_label)
-        self.response_label.setText('')
+        self.response_widget.setText('')
         self.thread.start()
 
         self.overlay = None
 
     def update_response_label(self, text):
-        current_text = self.response_label.text()
-        self.response_label.setText(current_text + text)
+        current_text = self.response_widget.text()
+        self.response_widget.setText(current_text + text)
 
 
 if __name__ == '__main__':
