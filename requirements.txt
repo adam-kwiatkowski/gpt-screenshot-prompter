@@ -1,0 +1,4 @@
+openai~=1.34.0
+python-dotenv~=1.0.1
+pillow~=10.3.0
+PyQt5~=5.15.10
