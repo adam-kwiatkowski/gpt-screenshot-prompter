@@ -1,7 +1,7 @@
 from PIL import Image, ImageGrab
 from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtGui import QPainter, QBrush, QColor, QPen, QIcon
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QApplication
 
 
 class RegionSelectOverlay(QWidget):
@@ -22,12 +22,13 @@ class RegionSelectOverlay(QWidget):
         self.setGeometry(0, 0, self.screen().geometry().width(), self.screen().geometry().height())
 
         self.label = QLabel(self)
-        self.label.setText("Click and drag to select region.")
+        self.label.setText("Click and drag to select a region.")
         self.label.setStyleSheet("QLabel { color : white; font-size: 30px; }")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setGeometry(0, 0, self.screen().geometry().width(), 100)
 
         self.setMouseTracking(True)
+        QApplication.setOverrideCursor(Qt.CrossCursor)
 
         self.show()
 

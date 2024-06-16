@@ -1,16 +1,20 @@
 import base64
+import sys
 from io import BytesIO
 from pathlib import Path
 
-from openai import OpenAI
-from dotenv import load_dotenv
-import sys
 from PIL import ImageGrab, Image
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtGui import QFont, QFontDatabase, QIcon
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QCheckBox
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
+from dotenv import load_dotenv
+from openai import OpenAI
+
 from widgets.RegionSelectOverlay import RegionSelectOverlay
 from widgets.ScrollableTextWidget import ScrollableTextWidget
+
+# noinspection PyUnresolvedReferences
+import resources
 
 
 class OpenAIStreamer(QThread):
@@ -43,10 +47,6 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout()
 
-        self.label = QLabel('Click the button to start.')
-        self.label.setObjectName('h2')
-        layout.addWidget(self.label)
-
         self.start_button = QPushButton('Start')
         self.start_button.clicked.connect(self.show_region_overlay)
         self.start_button.setFixedHeight(35)
@@ -74,6 +74,7 @@ class MainWindow(QWidget):
         self.overlay.overlay_closed.connect(self.on_region_overlay_closed)
 
     def on_region_overlay_closed(self, bbox):
+        QApplication.restoreOverrideCursor()
         if bbox is None or len(bbox) == 0:
             return
         selected_region = self.screenshot.crop(bbox)

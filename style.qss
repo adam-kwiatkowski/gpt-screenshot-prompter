@@ -167,3 +167,45 @@ QCheckBox::indicator:indeterminate:pressed {
     border: 1px solid #ffffff;
 }
 
+QScrollArea {
+    background-color: #121212;
+    border: 1px solid #414141;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: #090909;
+}
+
+QScrollBar:vertical {
+    width: 9px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #414141;
+    border-radius: 4px;
+    border: 2px solid #090909;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #515151;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: #090909;
+}
+
+QScrollBar:horizontal {
+    height: 9px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #414141;
+    border-radius: 4px;
+    border: 2px solid #090909;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #515151;
+}
