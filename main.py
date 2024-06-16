@@ -10,11 +10,10 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLa
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from widgets.RegionSelectOverlay import RegionSelectOverlay
-from widgets.ScrollableTextWidget import ScrollableTextWidget
-
 # noinspection PyUnresolvedReferences
 import resources
+from widgets.RegionSelectOverlay import RegionSelectOverlay
+from widgets.ScrollableTextWidget import ScrollableTextWidget
 
 
 class OpenAIStreamer(QThread):
@@ -25,9 +24,22 @@ class OpenAIStreamer(QThread):
         self.img_base64 = img_base64
 
     def run(self):
-        for response in client.chat.completions.create(model="gpt-4o", messages=[{"role": "user", "content": [
-            {"type": "image_url", "image_url": {"url": self.img_base64.decode('utf-8')}}], }], max_tokens=300,
-                                                       stream=True):
+        for response in client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image_url",
+                            "image_url": {"url": self.img_base64.decode("utf-8")},
+                        }
+                    ],
+                }
+            ],
+            max_tokens=300,
+            stream=True,
+        ):
             self.response_chunk.emit(response.choices[0].delta.content)
 
 
@@ -42,24 +54,24 @@ class MainWindow(QWidget):
         self.screenshot = None
 
         self.setGeometry(100, 100, 300, 400)
-        self.setWindowTitle('GPT Prompter')
-        self.setWindowIcon(QIcon(':/icons/ic_launcher.png'))
+        self.setWindowTitle("GPT Prompter")
+        self.setWindowIcon(QIcon(":/icons/ic_launcher.png"))
 
         layout = QVBoxLayout()
 
-        self.start_button = QPushButton('Start')
+        self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self.show_region_overlay)
         self.start_button.setFixedHeight(35)
-        self.start_button.setFont(QFont('Inter', 10))
-        self.start_button.setObjectName('primary')
+        self.start_button.setFont(QFont("Inter", 10))
+        self.start_button.setObjectName("primary")
         layout.addWidget(self.start_button)
 
         self.response_widget = ScrollableTextWidget()
         self.response_widget.setText("Response will appear here.")
         layout.addWidget(self.response_widget)
 
-        self.version_label = QLabel('Adam Kwiatkowski v0.1.0')
-        self.version_label.setObjectName('version')
+        self.version_label = QLabel("Adam Kwiatkowski v0.1.0")
+        self.version_label.setObjectName("version")
         self.version_label.setAlignment(Qt.AlignRight)
         layout.addWidget(self.version_label)
 
@@ -82,11 +94,11 @@ class MainWindow(QWidget):
         selected_region.save(buffered, format="JPEG")
         img_str = base64.b64encode(buffered.getvalue())
 
-        img_base64 = bytes("data:image/jpeg;base64,", encoding='utf-8') + img_str
+        img_base64 = bytes("data:image/jpeg;base64,", encoding="utf-8") + img_str
 
         self.thread = OpenAIStreamer(img_base64)
         self.thread.response_chunk.connect(self.update_response_label)
-        self.response_widget.setText('')
+        self.response_widget.setText("")
         self.thread.start()
 
         self.overlay = None
@@ -96,13 +108,13 @@ class MainWindow(QWidget):
         self.response_widget.setText(current_text + text)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     load_dotenv()
     client = OpenAI()
 
     app = QApplication(sys.argv)
-    QFontDatabase.addApplicationFont(':/fonts/Inter-Regular.ttf')
-    app.setStyleSheet(Path('style.qss').read_text())
+    QFontDatabase.addApplicationFont(":/fonts/Inter-Regular.ttf")
+    app.setStyleSheet(Path("style.qss").read_text())
     mainWindow = MainWindow()
     mainWindow.show()
     sys.exit(app.exec_())

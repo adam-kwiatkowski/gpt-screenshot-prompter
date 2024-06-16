@@ -1,7 +1,7 @@
-from PIL import Image, ImageGrab
+from PIL import Image
 from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QPainter, QBrush, QColor, QPen, QIcon
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QApplication
+from PyQt5.QtGui import QPainter, QBrush, QColor
+from PyQt5.QtWidgets import QWidget, QLabel, QApplication
 
 
 class RegionSelectOverlay(QWidget):
@@ -19,7 +19,9 @@ class RegionSelectOverlay(QWidget):
 
         self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setGeometry(0, 0, self.screen().geometry().width(), self.screen().geometry().height())
+        self.setGeometry(
+            0, 0, self.screen().geometry().width(), self.screen().geometry().height()
+        )
 
         self.label = QLabel(self)
         self.label.setText("Click and drag to select a region.")
@@ -39,8 +41,12 @@ class RegionSelectOverlay(QWidget):
         painter.drawRect(self.rect())
         if self.region_start and self.region_end:
             painter.setBrush(QBrush(QColor(255, 255, 255, 55)))
-            painter.drawRect(self.region_start[0], self.region_start[1], self.region_end[0] - self.region_start[0],
-                             self.region_end[1] - self.region_start[1])
+            painter.drawRect(
+                self.region_start[0],
+                self.region_start[1],
+                self.region_end[0] - self.region_start[0],
+                self.region_end[1] - self.region_start[1],
+            )
 
     def mousePressEvent(self, event):
         self.region_start = (event.pos().x(), event.pos().y())
@@ -70,7 +76,12 @@ class RegionSelectOverlay(QWidget):
         selected_region = (self.region_start, self.region_end)
         self.region_start = None
         self.region_end = None
-        bbox = [selected_region[0][0], selected_region[0][1], selected_region[1][0], selected_region[1][1]]
+        bbox = [
+            selected_region[0][0],
+            selected_region[0][1],
+            selected_region[1][0],
+            selected_region[1][1],
+        ]
         self.overlay_closed.emit(bbox)
 
         self.update()
