@@ -21,7 +21,7 @@ class OpenAIStreamer(QThread):
         self.img_base64 = img_base64
 
     def run(self):
-        for response in client.chat.completions.create(model="gpt-4-turbo", messages=[{"role": "user", "content": [
+        for response in client.chat.completions.create(model="gpt-4o", messages=[{"role": "user", "content": [
             {"type": "image_url", "image_url": {"url": self.img_base64.decode('utf-8')}}], }], max_tokens=300,
                                                        stream=True):
             self.response_chunk.emit(response.choices[0].delta.content)
